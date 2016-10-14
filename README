@@ -1,0 +1,12 @@
+一种离线SLAM获取三维图的方法
+1.在线跑orb_slam2,录制成oni格式的录像
+2.离线对oni录像逐帧处理得到相机的位姿数据
+3.将oni文件转换成为ElasticFusion支持的klg格式
+4.将klg文件和位姿数据传递给ElasticFusion，fusion成图
+使用方法
+cd ×××/ORB_SLAM2_modified
+./Examples/RGB-D/rgbd_xtion_cc Vocabulary/ORBvoc.txt Examples/RGB-D/xtion.yaml 
+./Examples/RGB-D/rgbd_xtion_cc_offline Vocabulary/ORBvoc.txt Examples/RGB-D/xtion.yaml test.oni
+FormatConverter test.oni test.klg
+cd ×××/ElasticFusion-master/GUI/build
+./ElasticFusion -l test.klg -p trajectory.txt -ocl
