@@ -1,0 +1,1 @@
+采用设备很随意的旋转kinect第1代360度采集室内的数据，其中只用orb_slam2得到的点云效果很糟糕，只用ElasticFusion时由于个别地方移动较快，得到的点云效果也不理想，当以orb_slam2获取的相机位姿提供给ElasticFusion时，ElasticFusion的读取已经计算得到的位姿数据，同时也在进行闭环探测，最终得到了较理想的结果。
