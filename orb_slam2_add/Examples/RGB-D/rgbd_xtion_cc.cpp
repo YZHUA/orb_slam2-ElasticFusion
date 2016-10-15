@@ -193,7 +193,6 @@ int main(int argc, char **argv)
     SLAM.Shutdown();  
     SLAM.SaveTrajectoryTUM("trajectory.txt");  
     SLAM.SaveTrajectoryKITTI("trajectory1.txt");
-    SLAM.SaveTrajectoryKITTI("trajectory1.txt");
     cv::destroyAllWindows();  
     return 0;  
 }  
