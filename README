@@ -6,8 +6,7 @@
 编译
 下载orb_slam2,(https://github.com/gaoxiang12/ORBSLAM2_with_pointcloud_map)，
 添加两个cpp文件和一个yaml文件，修改CMakeLists.txt，编译。
-编译ElasticFusion，这里的ElasticFusion源码中有几处修改，在GroundTruthOdometry.cpp和MainController.cpp中有修改，其它代码一致。
-编译FormatConverter。
+下载ElasticFusion（https://github.com/mp3guy/ElasticFusion），替换两个cpp文件后编译ElasticFusion。
 使用
 cd ×××/ORB_SLAM2_modified
 ./Examples/RGB-D/rgbd_xtion_cc Vocabulary/ORBvoc.txt Examples/RGB-D/xtion.yaml 
