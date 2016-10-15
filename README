@@ -1,9 +1,14 @@
-一种离线SLAM获取三维图的方法
+一种离线SLAM获取三维图的方法(linux平台，ubuntu14.04测试）
 1.在线跑orb_slam2,录制成oni格式的录像
 2.离线对oni录像逐帧处理得到相机的位姿数据
 3.将oni文件转换成为ElasticFusion支持的klg格式
 4.将klg文件和位姿数据传递给ElasticFusion，fusion成图
-使用方法
+编译
+下载orb_slam2,(https://github.com/gaoxiang12/ORBSLAM2_with_pointcloud_map)，
+添加两个cpp文件和一个yaml文件，修改CMakeLists.txt，编译。
+编译ElasticFusion，这里的ElasticFusion源码中有几处修改，在GroundTruthOdometry.cpp和MainController.cpp中有修改，其它代码一致。
+编译FormatConverter。
+使用
 cd ×××/ORB_SLAM2_modified
 ./Examples/RGB-D/rgbd_xtion_cc Vocabulary/ORBvoc.txt Examples/RGB-D/xtion.yaml 
 ./Examples/RGB-D/rgbd_xtion_cc_offline Vocabulary/ORBvoc.txt Examples/RGB-D/xtion.yaml test.oni
