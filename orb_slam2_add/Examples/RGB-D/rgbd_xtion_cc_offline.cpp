@@ -100,7 +100,7 @@ int main(int argc, char **argv)
     //argv[3]="/home/yzh/orbslam/gaox/ORB_SLAM2_modified/test.oni";
     if(argc != 4)
     {
-        cerr << endl << "Usage: ./rgbd_cc path_to_vocabulary path_to_settings" << endl;
+        cerr << endl << "Usage: ./rgbd_cc_offline path_to_vocabulary path_to_settings" << endl;
         return 1;
     }
 
@@ -177,7 +177,6 @@ int main(int argc, char **argv)
     // Stop all threads
     SLAM.Shutdown();
     SLAM.SaveTrajectoryTUM("trajectory.txt");
-    SLAM.SaveTrajectoryKITTI("trajectory1.txt");
     SLAM.SaveTrajectoryKITTI("trajectory1.txt");
 
     cv::destroyAllWindows();
