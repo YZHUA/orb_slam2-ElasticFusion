@@ -40,7 +40,10 @@ void GroundTruthOdometry::loadTrajectory(const std::string & filename)
         double utime_tmp,x, y, z, qx, qy, qz, qw;
         std::getline(file, line);
 	int n = sscanf(line.c_str(), "%lf %lf %lf %lf %lf %lf %lf %lf", &utime_tmp, &x, &y, &z, &qx, &qy, &qz, &qw);
-	utime=(unsigned long long int)(utime_tmp);
+	if(utime_tmp-int(utime_tmp)>0.0001)
+		utime=(unsigned long long int)(utime_tmp*100);//有些时间戳是小数，乘以100取整
+	else
+		utime=(unsigned long long int)(utime_tmp);//有些时间戳是整数
         if(file.eof())
             break;
 
