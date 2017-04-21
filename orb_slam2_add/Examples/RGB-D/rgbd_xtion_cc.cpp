@@ -153,6 +153,9 @@ int main(int argc, char **argv)
   
     // Main loop  
     cv::Mat imRGB, imD;  
+    //程序按q退出不方便，采用用手遮挡传感器后关闭系统
+    bool SDS=false;//关闭系统的信号
+  
     bool continueornot = true;  
     // 循环读取数据流信息并保存在VideoFrameRef中  
     VideoFrameRef  frameDepth;  
@@ -163,7 +166,15 @@ int main(int argc, char **argv)
         rc = streamDepth.readFrame(&frameDepth);  
         if (rc == STATUS_OK)  
         {  
-            imD = cv::Mat(frameDepth.getHeight(), frameDepth.getWidth(), CV_16UC1, (void*)frameDepth.getData());   //获取深度图  
+            imD = cv::Mat(frameDepth.getHeight(), frameDepth.getWidth(), CV_16UC1, (void*)frameDepth.getData());   //获取深度图 
+            //判断传感器是不是被遮挡
+            int n_inlier=0;
+            for(int i=0;i<imD.cols;i+=10)
+              for(int j=0;j<imD.rows;j+=10)
+                if(imD.at<ushort>(j,i)<10)
+                  n_inlier++;
+            if(n_inlier==0)
+              SDS=true;//传感器被完全遮挡
         }  
         rc = streamColor.readFrame(&frameColor);  
         if (rc == STATUS_OK)  
@@ -186,6 +197,8 @@ int main(int argc, char **argv)
         default:  
             break;  
         }  
+        if(SDS)//手动遮挡传感器自动关闭系统
+            break;
     }  
     streamColor.destroy();
     streamDepth.destroy();
